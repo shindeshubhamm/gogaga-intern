@@ -1,0 +1,21 @@
+{
+  "name": "gogaga-intern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "env-cmd --file='./config/dev.env' nodemon src/app.js -e js,hbs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.9.16",
+    "validator": "^13.0.0"
+  }
+}
