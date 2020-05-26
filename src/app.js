@@ -1,36 +1,26 @@
 const path = require('path')
 const express = require('express')
+const userRoutes = require('./routes/userRoutes')
 require('./db/mongoose')
-const User = require('./models/user')
-const hbs = require('hbs')
 
 const app = express()
 const port = process.env.PORT
 
-// Directory Paths
+// Recognize as json
+app.use(express.json({ extended: false }))
+
+// Directory Path
 const publicDirectoryPath = path.join(__dirname, "../public/")
-const viewsPath = path.join(__dirname, "../templates/views")
-const partialsPath = path.join(__dirname, "../templates/partials")
 
-app.use(express.static(publicDirectoryPath))
-app.set('view engine', 'hbs')
-app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
+// Static route
+app.use('/gogaga', express.static(publicDirectoryPath))
 
-// Routes
-// Lists of friends
-app.get('/gogaga/list.html', (req, res) => {
-  res.render('list.hbs')
-})
-
-// Form to enter data
-app.get('/gogaga/add.html', async (req, res) => {
-  res.render('add.hbs')
-})
+// api endpoints routes
+app.use('/api', userRoutes)
 
 // 404 Handeling
-app.get('/*', (req, res) => {
-  res.send('It seems that you are lost.')
+app.get('*', (req, res) => {
+  res.send('<h1 align="center">It seems that you have lost!</h1>')
 })
 
 // Run application on port configured.
