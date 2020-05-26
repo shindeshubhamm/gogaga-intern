@@ -15,9 +15,12 @@ router.post('/add', async (req, res) => {
   const user = new User(req.body)
   try {
     await user.save()
-    res.status(200).send("Added succesfully!")
+    res.status(200).send({ msg: "Added succesfully!" })
   } catch (e) {
-    res.status(400).send({ error: e.message })
+    if (e.message.includes("dup key")) {
+      return res.status(400).send({ error: "Friend with email already exists!" })
+    }
+    res.status(500).send({ error: "Couldn't add friend! Check your internet connection and try again" })
   }
 })
 
