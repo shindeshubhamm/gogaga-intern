@@ -5,6 +5,7 @@ const alertInPage = document.getElementById("alertMsg")
 
 addForm.addEventListener('submit', async (e) => {
   e.preventDefault()
+  alertInPage.innerHTML = `<img src="./images/spinner.gif" alt="Inserting..." width=100px height=auto />`
   const res = await fetch("/api/add", {
     method: "POST",
     body: JSON.stringify({
@@ -17,9 +18,9 @@ addForm.addEventListener('submit', async (e) => {
   })
   const response = await res.json()
   if (response.error) {
-    alertInPage.innerHTML = `<div class=\"alert alert-danger\" role=\"alert\">${response.error}</div>`
+    alertInPage.innerHTML = `<div class="alert alert-danger" role="alert">${response.error}</div>`
   } else {
-    alertInPage.innerHTML = `<div class=\"alert alert-success\" role=\"alert\">${response.msg}</div>`
+    alertInPage.innerHTML = `<div class="alert alert-success" role="alert">${response.msg}</div>`
   }
   name.value = ''
   email.value = ''

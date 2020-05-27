@@ -12,15 +12,15 @@ app.use(express.json({ extended: false }))
 // Directory Path
 const publicDirectoryPath = path.join(__dirname, "../public/")
 
-// Static route
+// Static routes
 app.use('/gogaga', express.static(publicDirectoryPath))
 
 // api endpoints routes
 app.use('/api', userRoutes)
 
-// 404 Handeling
+// Redirect all routes
 app.get('*', (req, res) => {
-  res.send('<h1 align="center">It seems that you have lost!</h1>')
+  res.redirect('/gogaga/list.html')
 })
 
 // Run application on port configured.
